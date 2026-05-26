@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ==========================================================================
+   SLEEK INTERFACE CUSTOM LAYOUTS & OVERRIDES
+   ========================================================================== */
+
+/* 1. Global typography and background */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #f8fafc;
+  color: #334155;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 2. Soft Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* 3. Main Workspace Transformations (Convert dark-theme templates to light-theme elegance) */
+main {
+  background-color: #f8fafc !important;
+}
+
+/* Convert solid dark boxes to premium light cards */
+main .bg-slate-900\/60,
+main .bg-slate-900,
+main .bg-zinc-950\/60,
+main .bg-zinc-950\/40,
+main .bg-zinc-950\/80,
+main .bg-zinc-950,
+main .bg-zinc-900,
+main .bg-zinc-850,
+main .bg-slate-905 {
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Overrule internal dark borders */
+main .border-slate-800\/80,
+main .border-slate-800,
+main .border-zinc-800,
+main .border-zinc-850,
+main .border-zinc-858,
+main .border-slate-850,
+main .border-zinc-900,
+main .border-slate-700,
+main .border-zinc-805,
+main .divide-zinc-900 {
+  border-color: #e2e8f0 !important;
+  border-style: solid;
+}
+
+/* Maintain dark style for custom emulator and sidebar wrappers ONLY */
+aside.bg-slate-900,
+aside.bg-slate-900 * {
+  box-shadow: none !important;
+}
+
+/* 4. Text Contrast Enforcement */
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6,
+main .font-bold.text-white,
+main .text-white {
+  color: #0f172a !important;
+}
+
+/* Sub-headings and muted labels */
+main .text-zinc-400,
+main .text-zinc-500,
+main .text-slate-400,
+main .text-zinc-300,
+main .text-zinc-350,
+main .text-slate-500 {
+  color: #64748b !important;
+}
+
+main .text-zinc-150,
+main .text-zinc-200,
+main .text-slate-100 {
+  color: #334155 !important;
+}
+
+/* Accent texts */
+main .text-indigo-400 {
+  color: #4f46e5 !important;  /* Modern Indigo accent color */
+}
+
+/* 5. Refine Forms, Inputs, and Select options */
+main select,
+main input,
+main textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02) !important;
+}
+
+main select:focus,
+main input:focus,
+main textarea:focus {
+  border-color: #4f46e5 !important;
+  outline: 2px solid rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Specific select options color check */
+main select option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* 6. Elevate Tables for Light Theme */
+main table {
+  background-color: #ffffff;
+  border-collapse: separate !important;
+}
+
+main table thead {
+  background-color: #f8fafc !important;
+}
+
+main table thead th {
+  color: #475569 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+  padding: 12px 16px !important;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+}
+
+main table tbody tr {
+  transition: background-color 0.15s ease;
+  background-color: #ffffff !important;
+}
+
+main table tbody tr:hover {
+  background-color: #f1f5f9 !important;
+}
+
+main table tbody td {
+  border-bottom: 1px solid #f1f5f9 !important;
+  padding: 14px 16px !important;
+  color: #334155 !important;
+}
+
+/* Table detail sub-elements */
+main table td .text-white {
+  color: #0f172a !important;
+}
+
+main table tr td button {
+  background-color: rgba(79, 70, 229, 0.08) !important;
+  color: #4f46e5 !important;
+  border: 1px solid rgba(79, 70, 229, 0.1) !important;
+}
+
+main table tr td button:hover {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  border-color: #4f46e5 !important;
+}
+
+/* 7. Premium UI Gradients */
+
+/* Top header banner gradient to rich indigo */
+main .bg-gradient-to-r.from-zinc-950 {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+  box-shadow: 0 10px 25px -5px rgba(67, 56, 202, 0.2) !important;
+}
+
+main .bg-gradient-to-r.from-zinc-950 * {
+  color: #ffffff !important; /* Force text to white for optimal contrast */
+}
+
+main .bg-gradient-to-r.from-zinc-950 p {
+  color: #c7d2fe !important;
+}
+
+main .bg-gradient-to-r.from-zinc-950 button {
+  color: #0f172a !important;
+}
+
+/* 8. Badge Enhancements */
+main .bg-zinc-950\/40,
+main .bg-zinc-950\/60,
+main .bg-zinc-950 {
+  background-color: #f1f5f9 !important;
+}
+
+/* Status Badges */
+main .bg-rose-950\/90,
+main .bg-rose-950 {
+  background-color: #fef2f2 !important;
+  color: #ef4444 !important;
+  border-color: #fee2e2 !important;
+}
+
+main .bg-emerald-950\/90,
+main .bg-emerald-950 {
+  background-color: #f0fdf4 !important;
+  color: #10b981 !important;
+  border-color: #dcfce7 !important;
+}
+
+main .bg-amber-950\/70,
+main .bg-amber-950 {
+  background-color: #fffbeb !important;
+  color: #f59e0b !important;
+  border-color: #fef3c7 !important;
+}
+
+main .bg-indigo-950\/60,
+main .bg-indigo-950 {
+  background-color: #e0e7ff !important;
+  color: #4f46e5 !important;
+  border-color: #c7d2fe !important;
+}
+
+/* Progress bar rail background for light theme */
+main .bg-zinc-850 {
+  background: #e2e8f0 !important;
+}
+
+/* Circular Pie Gauges and specific custom icons */
+main circle.stroke-zinc-850 {
+  stroke: #e2e8f0 !important;
+}
+main circle.stroke-indigo-650 {
+  stroke: #4f46e5 !important;
+}
+
+/* Simple animations for premium microinteractions */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

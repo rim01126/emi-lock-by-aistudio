@@ -1,0 +1,6 @@
+{
+  "name": "EMI Secure Lock",
+  "description": "A production-grade multi-shop Android EMI Device Management & Lock System with remote locks, offline access keys, and real-time tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
