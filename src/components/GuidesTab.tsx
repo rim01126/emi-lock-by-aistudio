@@ -40,7 +40,7 @@ export default function GuidesTab() {
       };
       
       const qr2 = {
-        "tenant_id": "maruti-mobile-arena",
+        "tenant_id": "phoneworld-secured",
         "shop_id": dev.shopId,
         "device_id": dev.id,
         "device_model": dev.model,
@@ -278,7 +278,7 @@ import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 
 /**
- * Singleton configuration layer for Maruti Mobile's Admin Portal.
+ * Singleton configuration layer for Phoneworld's Admin Portal.
  * Initializes Supabase config with Auth and Postgres query.
  */
 object SupabaseClientProvider {
@@ -602,7 +602,7 @@ serve(async (req) => {
 
     // QR 2 Payload: App Config details, binding DPC client instance with active customer
     const qr2Payload = {
-      "tenant_id": "maruti-mobile-arena",
+      "tenant_id": "phoneworld-secured",
       "shop_id": device.shop_id,
       "device_id": device.id,
       "device_model": device.model,
@@ -871,7 +871,7 @@ serve(async (req) => {
             </h4>
             <p>
               This code module is structured under standard Android Studio layout guidelines. By utilizing the 
-              <strong> Supabase Kotlin SDK</strong> paired with <strong>Google ML Kit Barcode Vision</strong>, shop executives at Maruti Mobile Arena gain:
+              <strong> Supabase Kotlin SDK</strong> paired with <strong>Google ML Kit Barcode Vision</strong>, shop executives at Phoneworld gain:
             </p>
             <ul className="list-disc pl-5 space-y-1 my-2">
               <li><strong>Zero-Touch Handshake:</strong> Instantly parsing standard Android Enterprise provisioning extra-bundles to trigger Device Owner bindings.</li>

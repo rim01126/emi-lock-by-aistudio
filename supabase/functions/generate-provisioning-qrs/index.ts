@@ -12,7 +12,7 @@ const corsHeaders = {
 }
 
 // In-flight device directory for fallback simulation within Deno sandbox
-// Matches production database layouts in Maruti Mobile Arena
+// Matches production database layouts in Phoneworld
 const STABLE_DEVICE_REGISTRY = [
   {
     id: "dev-harshil",
@@ -100,9 +100,9 @@ serve(async (req) => {
     };
 
     // 4. SECURE QR 2 PAYLOAD: App Config / Over-The-Air Activation Token
-    // Incepts specific tenant metadata to authenticate client instances with Maruti Secure DPC.
+    // Incepts specific tenant metadata to authenticate client instances with Phoneworld Secure DPC.
     const qr2Payload = {
-      "tenant_id": "maruti-mobile-arena",
+      "tenant_id": "phoneworld-secured",
       "shop_id": device.shopId,
       "device_id": device.id,
       "device_model": device.model,

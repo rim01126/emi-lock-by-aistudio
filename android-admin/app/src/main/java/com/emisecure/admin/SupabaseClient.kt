@@ -6,7 +6,7 @@ import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 
 /**
- * Singleton configuration layer for Maruti Mobile's Admin Portal.
+ * Singleton configuration layer for Phoneworld's Admin Portal.
  * Initializes Supabase plugins required for onboarding, lock tracking, and real-time.
  */
 object SupabaseClientProvider {

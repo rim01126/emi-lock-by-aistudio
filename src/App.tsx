@@ -59,6 +59,7 @@ export default function App() {
   const [isTenantOpen, setIsTenantOpen] = useState(false);
 
   // Core state datasets representing live database rows
+  const [profiles, setProfiles] = useState<Profile[]>(defaultProfiles);
   const [customers, setCustomers] = useState<Customer[]>(defaultCustomers);
   const [devices, setDevices] = useState<Device[]>(defaultDevices);
   const [loans, setLoans] = useState<Loan[]>(defaultLoans);
@@ -94,6 +95,10 @@ export default function App() {
     ? loans.find(l => l.customerId === panelCustomer.id) || null
     : null;
 
+  const currentOwner = profiles.find(p => p.shopId === activeShop.id && p.role === 'owner') || { 
+    id: 'temp', shopId: activeShop.id, fullName: 'Owner', role: 'owner', email: activeShop.id === 'shop-rajkot' ? 'rim01119@gmail.com' : 'owner.sai@gmail.com', password: '' 
+  };
+
   // Real-time operations handlers
 
   // 1. ADD NEW CUSTOMER PROFILE (Requires hardware details)
@@ -124,7 +129,7 @@ export default function App() {
       id: `aud-${Date.now()}`,
       shopId: activeShop.id,
       userId: 'user-jayesh', // Simulated logged owner
-      userEmail: activeShop.id === 'shop-rajkot' ? 'owner.maruti@gmail.com' : 'owner.sai@gmail.com',
+      userEmail: currentOwner.email,
       action: 'REGISTER_CUSTOMER',
       targetType: 'customer',
       targetId: newCust.id,
@@ -201,7 +206,7 @@ export default function App() {
       id: `aud-${Date.now()}`,
       shopId: activeShop.id,
       userId: 'user-jayesh',
-      userEmail: activeShop.id === 'shop-rajkot' ? 'owner.maruti@gmail.com' : 'owner.sai@gmail.com',
+      userEmail: currentOwner.email,
       action: 'ADD_PAYMENT_RECEIPT',
       targetType: 'payment',
       targetId: freshPayment.id,
@@ -227,7 +232,7 @@ export default function App() {
       id: `aud-${Date.now()}`,
       shopId: activeShop.id,
       userId: 'user-jayesh',
-      userEmail: activeShop.id === 'shop-rajkot' ? 'owner.maruti@gmail.com' : 'owner.sai@gmail.com',
+      userEmail: currentOwner.email,
       action: 'EDIT_PAYMENT_AUDIT',
       targetType: 'payment',
       targetId: paymentId,
@@ -313,7 +318,7 @@ export default function App() {
       id: `aud-${Date.now()}`,
       shopId: activeShop.id,
       userId: 'user-jayesh',
-      userEmail: activeShop.id === 'shop-rajkot' ? 'owner.maruti@gmail.com' : 'owner.sai@gmail.com',
+      userEmail: currentOwner.email,
       action: `DEVICE_COMMAND_${commandType}`,
       targetType: 'device',
       targetId: deviceId,
@@ -528,7 +533,7 @@ export default function App() {
               />
               <div className="hidden sm:block text-left text-[11.5px] leading-tight">
                 <p className="font-bold text-slate-800">Owner Tenant</p>
-                <p className="text-[9.5px] text-slate-500">owner.maruti@gmail.com</p>
+                <p className="text-[9.5px] text-slate-500">{currentOwner.email}</p>
               </div>
             </div>
 
@@ -613,7 +618,7 @@ export default function App() {
           {activeTab === 'settings' && (
             <SettingsTab
               shop={activeShop}
-              profiles={defaultProfiles}
+              profiles={profiles}
               onUpdateShop={(up) => {
                 setActiveShop(up);
                 // Also update defaults array so changes toggle themes everywhere!
@@ -623,7 +628,10 @@ export default function App() {
                 }
               }}
               onAddStaff={(newProf) => {
-                defaultProfiles.push(newProf);
+                setProfiles(prev => [...prev, newProf]);
+              }}
+              onUpdateProfile={(updatedProf) => {
+                setProfiles(prev => prev.map(p => p.id === updatedProf.id ? updatedProf : p));
               }}
             />
           )}

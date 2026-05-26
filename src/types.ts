@@ -14,6 +14,7 @@ export interface Profile {
   fullName: string;
   role: 'owner' | 'staff';
   email: string;
+  password?: string;
 }
 
 export interface Customer {

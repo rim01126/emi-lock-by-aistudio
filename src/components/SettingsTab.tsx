@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Shop, Profile } from '../types';
-import { Settings, Shield, Edit, UserPlus, Sliders, Palette, Check, Save } from 'lucide-react';
+import { Settings, Shield, Edit, UserPlus, Sliders, Palette, Check, Save, Lock, Eye, EyeOff, Key } from 'lucide-react';
 
 interface SettingsTabProps {
   shop: Shop;
   profiles: Profile[];
   onUpdateShop: (updatedShop: Shop) => void;
   onAddStaff: (profile: Profile) => void;
+  onUpdateProfile?: (updatedProfile: Profile) => void;
 }
 
 export default function SettingsTab({
@@ -14,6 +15,7 @@ export default function SettingsTab({
   profiles,
   onUpdateShop,
   onAddStaff,
+  onUpdateProfile,
 }: SettingsTabProps) {
   
   // States: Edits info
@@ -28,6 +30,26 @@ export default function SettingsTab({
   const [showAddStaffForm, setShowAddStaffForm] = useState(false);
   const [newStaffName, setNewStaffName] = useState('');
   const [newStaffEmail, setNewStaffEmail] = useState('');
+  
+  // States: Owner Info
+  const activeOwner = profiles.find(p => p.shopId === shop.id && p.role === 'owner');
+  const [ownerEmail, setOwnerEmail] = useState(activeOwner?.email || '');
+  const [ownerPassword, setOwnerPassword] = useState(activeOwner?.password || '');
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Sync state with selected shop
+  useEffect(() => {
+    setShopName(shop.name);
+    setSupportNumber(shop.supportNumber);
+    setAddress(shop.address);
+    setThemeColor(shop.themeColor);
+    setLogoText(shop.logoText);
+    setGstNumber(shop.gstNumber);
+
+    const owner = profiles.find(p => p.shopId === shop.id && p.role === 'owner');
+    setOwnerEmail(owner?.email || '');
+    setOwnerPassword(owner?.password || '');
+  }, [shop.id, profiles]);
   
   // Filters active staff for current Active shop
   const shopProfiles = profiles.filter(p => p.shopId === shop.id);
@@ -75,6 +97,29 @@ export default function SettingsTab({
     setNewStaffEmail('');
     setShowAddStaffForm(false);
     alert(`👤 Registered "${newStaffName}" as assistant staff member for ${shop.name}! API permissions are assigned.`);
+  };
+
+  const handleUpdateOwnerSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!ownerEmail) {
+      alert("Error: Owner User ID (Email) represents your account identity and is strictly mandatory.");
+      return;
+    }
+    if (!activeOwner) {
+      alert("Error: Active owner context profile record could not be set.");
+      return;
+    }
+
+    const updatedProfile: Profile = {
+      ...activeOwner,
+      email: ownerEmail,
+      password: ownerPassword
+    };
+
+    if (onUpdateProfile) {
+      onUpdateProfile(updatedProfile);
+      alert(`🔐 Owner Security Credentials successfully updated and synchronized with local rosters.\n• ID/Email: ${ownerEmail}\n• Active security encryption keys are generated.`);
+    }
   };
 
   const PRESET_THEMES = [
@@ -211,6 +256,70 @@ export default function SettingsTab({
               </button>
             </div>
 
+          </form>
+        </div>
+
+        {/* App Owner Credentials Card */}
+        <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 lg:col-span-2 space-y-4">
+          <div className="border-b border-zinc-800 pb-2.5 flex items-center justify-between">
+            <h3 className="font-bold text-white text-xs uppercase tracking-wide flex items-center gap-2">
+              <Lock className="w-4.5 h-4.5 text-rose-400" />
+              App Owner Credentials Configuration
+            </h3>
+            <span className="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-950/40 px-2.5 py-0.5 rounded border border-emerald-900/60">ROLE: OWNER</span>
+          </div>
+
+          <p className="text-zinc-450 text-xs leading-relaxed">
+            These credentials are used by you to log in as the owner of the application. They authenticate your active physical device admin app (<code className="font-mono text-indigo-400 text-[10.5px]">android-admin</code>) and remote command gateways.
+          </p>
+
+          <form onSubmit={handleUpdateOwnerSubmit} className="space-y-4 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-[10px] uppercase font-mono text-zinc-500 font-bold">Owner User ID / Email *</label>
+                <input
+                  type="email"
+                  required
+                  value={ownerEmail}
+                  onChange={(e) => setOwnerEmail(e.target.value)}
+                  className="w-full bg-zinc-950 border border-zinc-850 rounded-xl py-2 px-3 text-white outline-none focus:border-indigo-650"
+                  placeholder="owner.name@example.com"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[10px] uppercase font-mono text-zinc-500 font-bold col-span-1">Owner Private Password</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={ownerPassword}
+                    onChange={(e) => setOwnerPassword(e.target.value)}
+                    className="w-full bg-zinc-950 border border-zinc-850 rounded-xl py-2 pl-3 pr-10 text-white outline-none focus:border-indigo-650 font-mono"
+                    placeholder="Enter owner secret password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-right pt-3 border-t border-zinc-805 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+              <div className="text-[10px] text-zinc-500 text-left">
+                💡 <span className="font-bold">Kotlin Client Sync:</span> When you compile your Android app, match these credentials to login instantly.
+              </div>
+              <button
+                type="submit"
+                className="bg-indigo-650 hover:bg-indigo-700 text-white font-bold text-xs py-2 px-5 rounded-xl shadow-md transition-all flex items-center gap-1.5 cursor-pointer ml-auto sm:ml-0"
+              >
+                <Save className="w-4 h-4" />
+                Save Owner Credentials
+              </button>
+            </div>
           </form>
         </div>
 

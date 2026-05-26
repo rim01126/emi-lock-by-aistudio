@@ -3,16 +3,16 @@ import { Shop, Profile, Customer, Device, Loan, Installment, Payment, SimChangeL
 export const defaultShops: Shop[] = [
   {
     id: 'shop-rajkot',
-    name: 'Maruti Mobile Arena (Rajkot)',
-    supportNumber: '+91 98765 43210',
-    address: '102-105, Galaxy Commercial Center, Jawahar Road, Rajkot, Gujarat',
+    name: 'Phoneworld (Idar)',
+    supportNumber: '+91 97244 93045',
+    address: 'Idar, Sabarkantha, Gujarat, India',
     themeColor: '#4f46e5', // INDIGO
-    logoText: 'Maruti Secure',
+    logoText: 'Phoneworld Secure',
     gstNumber: '24AAAAA1111A1Z1'
   },
   {
     id: 'shop-ahmedabad',
-    name: 'Sai Mobile Point (Ahmedabad)',
+    name: 'Sai Mobile Point',
     supportNumber: '+91 99000 88222',
     address: 'G-12, Titanium Plaza, Prahlad Nagar, Ahmedabad, Gujarat',
     themeColor: '#059669', // EMERALD
@@ -25,23 +25,26 @@ export const defaultProfiles: Profile[] = [
   {
     id: 'user-jayesh',
     shopId: 'shop-rajkot',
-    fullName: 'Jayeshbhai Patel',
+    fullName: 'Owner Phoneworld',
     role: 'owner',
-    email: 'owner.maruti@gmail.com'
+    email: 'rim01119@gmail.com',
+    password: 'rim01119'
   },
   {
     id: 'user-amit',
     shopId: 'shop-rajkot',
-    fullName: 'Amit Goswami',
+    fullName: 'Staff Phoneworld',
     role: 'staff',
-    email: 'amit.staff@gmail.com'
+    email: 'staff.phoneworld@gmail.com',
+    password: 'staff_password456'
   },
   {
     id: 'user-hardik',
     shopId: 'shop-ahmedabad',
     fullName: 'Hardik Shah',
     role: 'owner',
-    email: 'owner.sai@gmail.com'
+    email: 'owner.sai@gmail.com',
+    password: 'safepassword789'
   }
 ];
 
@@ -377,7 +380,7 @@ export const defaultAuditLogs: AuditLog[] = [
     id: 'aud-1',
     shopId: 'shop-rajkot',
     userId: 'user-jayesh',
-    userEmail: 'owner.maruti@gmail.com',
+    userEmail: 'rim01119@gmail.com',
     action: 'REGISTER_CUSTOMER',
     targetType: 'customer',
     targetId: 'cust-harshil',
@@ -387,7 +390,7 @@ export const defaultAuditLogs: AuditLog[] = [
     id: 'aud-2',
     shopId: 'shop-rajkot',
     userId: 'user-jayesh',
-    userEmail: 'owner.maruti@gmail.com',
+    userEmail: 'rim01119@gmail.com',
     action: 'DEVICE_COMMAND_LOCK_LEVEL4',
     targetType: 'device',
     targetId: 'dev-manoj',
@@ -397,7 +400,7 @@ export const defaultAuditLogs: AuditLog[] = [
     id: 'aud-3',
     shopId: 'shop-rajkot',
     userId: 'user-amit',
-    userEmail: 'amit.staff@gmail.com',
+    userEmail: 'staff.phoneworld@gmail.com',
     action: 'DEVICE_COMMAND_BLOCK_SOCIAL',
     targetType: 'device',
     targetId: 'dev-parth',

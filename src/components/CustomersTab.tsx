@@ -512,7 +512,7 @@ export default function CustomersTab({
                 };
 
                 const qr2Payload = {
-                  "tenant_id": "maruti-mobile-arena",
+                  "tenant_id": "phoneworld-secured",
                   "shop_id": deviceDef.shopId,
                   "device_id": deviceDef.id,
                   "device_model": deviceDef.model,

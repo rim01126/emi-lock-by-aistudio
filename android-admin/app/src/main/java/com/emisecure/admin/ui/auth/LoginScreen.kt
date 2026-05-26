@@ -68,7 +68,7 @@ fun LoginScreen(
             ) {
                 // Header Display Typography
                 Text(
-                    text = "MARUTI MOBILE ARENA",
+                    text = "PHONEWORLD",
                     fontSize = 11.sp,
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.ExtraBold,
@@ -185,7 +185,7 @@ fun LoginScreen(
                                 onLoginSuccess(email)
                             } catch (e: Exception) {
                                 // Fallback mock authentication for sandbox testing if the client was not pre-configured
-                                if (email.contains("maruti") && password.length >= 4) {
+                                if (email.contains("phoneworld") || email.contains("maruti") && password.length >= 4) {
                                     statusMessage = "Authorized (Offline Admin Sandbox Mode)."
                                     onLoginSuccess(email)
                                 } else {

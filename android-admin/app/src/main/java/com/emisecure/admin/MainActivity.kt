@@ -12,7 +12,7 @@ import com.emisecure.admin.ui.scanner.OnboardingScannerScreen
 import com.emisecure.admin.ui.theme.EMISecureAdminTheme
 
 /**
- * Main application EntryPoint for Maruti Mobile Arena EMI Onboarding system.
+ * Main application EntryPoint for Phoneworld EMI Onboarding system.
  * Governs active admin operator states and binds Jetpack Compose surface.
  */
 class MainActivity : ComponentActivity() {

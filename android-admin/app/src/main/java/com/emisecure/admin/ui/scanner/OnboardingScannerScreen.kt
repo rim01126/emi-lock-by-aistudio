@@ -327,7 +327,7 @@ fun OnboardingScannerScreen(
                             onClick = {
                                 val simulatedQR2 = """
                                     {
-                                      "tenant_id": "maruti-mobile-arena",
+                                      "tenant_id": "phoneworld-secured",
                                       "shop_id": "shop-rajkot",
                                       "device_id": "dev-manoj",
                                       "device_model": "Samsung Galaxy M34 5G (128GB)",
